@@ -3,10 +3,10 @@
 
 Name:           os-prober
 Version:        1.53
-Release:        1
+Release:        2
 Summary:        Probes disks on the system for installed operating systems
 
-Group:          System Environment/Base
+Group:          System/Configuration/Boot and Init
 License:        GPL+
 URL:            http://kitenet.net/~joey/code/os-prober/
 Source0:        %{name}_%{version}.tar.gz
