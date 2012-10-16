@@ -2,14 +2,14 @@
 %define lprob linux-boot-prober
 
 Name:           os-prober
-Version:        1.53
-Release:        2
+Version:        1.56
+Release:        1
 Summary:        Probes disks on the system for installed operating systems
 
 Group:          System/Configuration/Boot and Init
 License:        GPL+
 URL:            http://kitenet.net/~joey/code/os-prober/
-Source0:        %{name}_%{version}.tar.gz
+Source0:        http://ftp.de.debian.org/debian/pool/main/o/os-prober/%{name}_%{version}.tar.gz
 Source1:        %{name}-pamd
 # move newns binary outside of os-prober subdirectory, so that debuginfo
 # can be automatically generated for it
