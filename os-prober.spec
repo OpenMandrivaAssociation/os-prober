@@ -3,7 +3,7 @@
 
 Name:           os-prober
 Version:        1.56
-Release:        1
+Release:        4
 Summary:        Probes disks on the system for installed operating systems
 
 Group:          System/Configuration/Boot and Init
@@ -16,9 +16,12 @@ Source1:        %{name}-pamd
 Patch0:         os-prober-newnsdirfix.patch
 Patch1:         os-prober-bsd-detection.patch
 Patch2:         os-prober-linux-detection.patch
+Patch3:		os-prober-missed-os-fix.patch
 
 Requires:       udev coreutils util-linux
-Requires:       /bin/grep /bin/sed /sbin/modprobe
+Requires:       grep
+Requires:		sed
+Requires:		module-init-tools
 
 %description
 This package detects other OSes available on a system and outputs the results
@@ -30,6 +33,7 @@ distributions can be added easily.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 find -type f -exec sed -i -e 's|usr/lib|usr/libexec|g' {} \;
 
 %build
