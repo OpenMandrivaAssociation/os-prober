@@ -40,7 +40,7 @@ distributions can be added easily.
 find -type f -exec sed -i -e 's|usr/lib|usr/libexec|g' {} \;
 
 %build
-%make CFLAGS="%{optflags}"
+%make CFLAGS="%{optflags} -Os"
 
 %install
 install -m 0755 -d %{buildroot}%{_bindir}
