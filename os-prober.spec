@@ -1,28 +1,28 @@
 %define _libexecdir %{_prefix}/libexec
 %define lprob linux-boot-prober
 
-Name:           os-prober
-Version:        1.56
-Release:        5
-Summary:        Probes disks on the system for installed operating systems
+Name:		os-prober
+Version:	1.56
+Release:	5
+Summary:	Probes disks on the system for installed operating systems
 
-Group:          System/Configuration/Boot and Init
-License:        GPL+
-URL:            http://kitenet.net/~joey/code/os-prober/
-Source0:        http://ftp.de.debian.org/debian/pool/main/o/os-prober/%{name}_%{version}.tar.gz
-Source1:        %{name}-pamd
+Group:		System/Configuration/Boot and Init
+License:	GPL+
+URL:		http://kitenet.net/~joey/code/os-prober/
+Source0:	http://ftp.de.debian.org/debian/pool/main/o/os-prober/%{name}_%{version}.tar.gz
+Source1:	%{name}-pamd
 # move newns binary outside of os-prober subdirectory, so that debuginfo
 # can be automatically generated for it
-Patch0:         os-prober-newnsdirfix.patch
-Patch1:         os-prober-bsd-detection.patch
-Patch2:         os-prober-linux-detection.patch
+Patch0:		os-prober-newnsdirfix.patch
+Patch1:		os-prober-bsd-detection.patch
+Patch2:		os-prober-linux-detection.patch
 Patch3:		os-prober-missed-os-fix.patch
-Patch4:         os-prober-mdraidfix.patch
+Patch4:		os-prober-mdraidfix.patch
 
-Requires:       udev coreutils util-linux
-Requires:       grep
-Requires:		sed
-Requires:		module-init-tools
+Requires:	udev coreutils util-linux
+Requires:	grep
+Requires:	sed
+Requires:	module-init-tools
 
 %description
 This package detects other OSes available on a system and outputs the results
@@ -40,7 +40,7 @@ distributions can be added easily.
 find -type f -exec sed -i -e 's|usr/lib|usr/libexec|g' {} \;
 
 %build
-make %{?_smp_mflags} CFLAGS="%{optflags}"
+%make CFLAGS="%{optflags}"
 
 %install
 install -m 0755 -d %{buildroot}%{_bindir}
@@ -77,4 +77,3 @@ ln -s %{_bindir}/consolehelper %{buildroot}%{_bindir}/%{lprob}
 %{_datadir}/%{name}
 %{_var}/lib/%{name}
 %{_sysconfdir}/pam.d/*
-
