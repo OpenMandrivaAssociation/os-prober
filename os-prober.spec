@@ -2,8 +2,8 @@
 %define lprob linux-boot-prober
 
 Name:		os-prober
-Version:	1.56
-Release:	4
+Version:	1.57
+Release:	1
 Summary:	Probes disks on the system for installed operating systems
 
 Group:		System/Configuration/Boot and Init
@@ -15,7 +15,7 @@ Source1:	%{name}-pamd
 # can be automatically generated for it
 Patch0:		os-prober-newnsdirfix.patch
 Patch1:		os-prober-bsd-detection.patch
-Patch2:		os-prober-linux-detection.patch
+Patch2:		os-prober-1.57-linux-detection.patch
 Patch3:		os-prober-missed-os-fix.patch
 Patch4:		os-prober-mdraidfix.patch
 Patch5:		os-prober-1.56-work-around-mount-hang-on-older-kernels.patch
