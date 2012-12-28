@@ -3,7 +3,7 @@
 
 Name:		os-prober
 Version:	1.56
-Release:	5
+Release:	4
 Summary:	Probes disks on the system for installed operating systems
 
 Group:		System/Configuration/Boot and Init
@@ -18,6 +18,7 @@ Patch1:		os-prober-bsd-detection.patch
 Patch2:		os-prober-linux-detection.patch
 Patch3:		os-prober-missed-os-fix.patch
 Patch4:		os-prober-mdraidfix.patch
+Patch5:		os-prober-1.56-work-around-mount-hang-on-older-kernels.patch
 
 Requires:	udev coreutils util-linux
 Requires:	grep
@@ -36,6 +37,7 @@ distributions can be added easily.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1 -b .mdraidfix~
+%patch5 -p1 -b .nohang~
 
 find -type f -exec sed -i -e 's|usr/lib|usr/libexec|g' {} \;
 
