@@ -3,7 +3,7 @@
 
 Name:		os-prober
 Version:	1.57
-Release:	1
+Release:	2
 Summary:	Probes disks on the system for installed operating systems
 
 Group:		System/Configuration/Boot and Init
@@ -20,10 +20,17 @@ Patch3:		os-prober-missed-os-fix.patch
 Patch4:		os-prober-mdraidfix.patch
 Patch5:		os-prober-1.56-work-around-mount-hang-on-older-kernels.patch
 
-Requires:	udev coreutils util-linux
+Requires:	udev
+Requires:	coreutils
+Requires:	util-linux
 Requires:	grep
 Requires:	sed
-Requires:	module-init-tools
+%if %mdvver >= 201300
+Requires:	kmod
+Requires:	kmod-compat
+%else
+Requires:	module-init-tool
+%endif
 
 %description
 This package detects other OSes available on a system and outputs the results
@@ -42,7 +49,7 @@ distributions can be added easily.
 find -type f -exec sed -i -e 's|usr/lib|usr/libexec|g' {} \;
 
 %build
-%make CFLAGS="%{optflags} -Os"
+%make CFLAGS="%{optflags} -Os" LDFLAGS="%{ldflags}"
 
 %install
 install -m 0755 -d %{buildroot}%{_bindir}
