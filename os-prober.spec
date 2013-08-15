@@ -1,14 +1,13 @@
 %define _libexecdir %{_prefix}/libexec
 %define lprob linux-boot-prober
 
+Summary:	Probes disks on the system for installed operating systems
 Name:		os-prober
 Version:	1.57
 Release:	2
-Summary:	Probes disks on the system for installed operating systems
-
 Group:		System/Configuration/Boot and Init
-License:	GPL+
-URL:		http://kitenet.net/~joey/code/os-prober/
+License:	GPLv2+
+Url:		http://kitenet.net/~joey/code/os-prober/
 Source0:	http://ftp.de.debian.org/debian/pool/main/o/os-prober/%{name}_%{version}.tar.gz
 Source1:	%{name}-pamd
 # move newns binary outside of os-prober subdirectory, so that debuginfo
@@ -19,12 +18,11 @@ Patch2:		os-prober-1.57-linux-detection.patch
 Patch3:		os-prober-missed-os-fix.patch
 Patch4:		os-prober-mdraidfix.patch
 Patch5:		os-prober-1.56-work-around-mount-hang-on-older-kernels.patch
-
-Requires:	udev
 Requires:	coreutils
-Requires:	util-linux
 Requires:	grep
 Requires:	sed
+Requires:	udev
+Requires:	util-linux
 %if %mdvver >= 201300
 Requires:	kmod
 Requires:	kmod-compat
@@ -39,12 +37,7 @@ distributions can be added easily.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1 -b .mdraidfix~
-%patch5 -p1 -b .nohang~
+%apply_patches
 
 find -type f -exec sed -i -e 's|usr/lib|usr/libexec|g' {} \;
 
@@ -86,3 +79,4 @@ ln -s %{_bindir}/consolehelper %{buildroot}%{_bindir}/%{lprob}
 %{_datadir}/%{name}
 %{_var}/lib/%{name}
 %{_sysconfdir}/pam.d/*
+
