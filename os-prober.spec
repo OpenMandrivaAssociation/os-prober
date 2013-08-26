@@ -3,7 +3,7 @@
 
 Summary:	Probes disks on the system for installed operating systems
 Name:		os-prober
-Version:	1.57
+Version:	1.63
 Release:	2
 Group:		System/Configuration/Boot and Init
 License:	GPLv2+
