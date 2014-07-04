@@ -23,12 +23,8 @@ Requires:	grep
 Requires:	sed
 Requires:	udev
 Requires:	util-linux
-%if %mdvver >= 201300
 Requires:	kmod
 Requires:	kmod-compat
-%else
-Requires:	module-init-tool
-%endif
 
 %description
 This package detects other OSes available on a system and outputs the results
@@ -42,7 +38,7 @@ distributions can be added easily.
 find -type f -exec sed -i -e 's|usr/lib|usr/libexec|g' {} \;
 
 %build
-%make CFLAGS="%{optflags} -Os" LDFLAGS="%{ldflags}"
+%make CC=%{__cc} CFLAGS="%{optflags} -Os" LDFLAGS="%{ldflags}"
 
 %install
 install -m 0755 -d %{buildroot}%{_bindir}
