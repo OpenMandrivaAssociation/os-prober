@@ -3,12 +3,12 @@
 
 Summary:	Probes disks on the system for installed operating systems
 Name:		os-prober
-Version:	1.63
-Release:	8
+Version:	1.64
+Release:	1
 Group:		System/Configuration/Boot and Init
 License:	GPLv2+
 Url:		http://kitenet.net/~joey/code/os-prober/
-Source0:	http://ftp.de.debian.org/debian/pool/main/o/os-prober/%{name}_%{version}.tar.gz
+Source0:	http://ftp.de.debian.org/debian/pool/main/o/os-prober/%{name}_%{version}.tar.xz
 Source1:	%{name}-pamd
 # move newns binary outside of os-prober subdirectory, so that debuginfo
 # can be automatically generated for it
@@ -24,7 +24,9 @@ Requires:	sed
 Requires:	udev
 Requires:	util-linux
 Requires:	kmod
+%if %mdvver < 201500
 Requires:	kmod-compat
+%endif
 
 %description
 This package detects other OSes available on a system and outputs the results
@@ -75,4 +77,3 @@ ln -s %{_bindir}/consolehelper %{buildroot}%{_bindir}/%{lprob}
 %{_datadir}/%{name}
 %{_var}/lib/%{name}
 %{_sysconfdir}/pam.d/*
-
