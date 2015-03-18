@@ -41,6 +41,8 @@ distributions can be added easily.
 %apply_patches
 
 find -type f -exec sed -i -e 's|usr/lib|usr/libexec|g' {} \;
+sed -i -e 's|grub-probe|grub2-probe|g' os-probes/common/50mounted-tests \
+     linux-boot-probes/common/50mounted-tests
 
 %build
 %make CC=%{__cc} CFLAGS="%{optflags} -Os" LDFLAGS="%{ldflags}"
