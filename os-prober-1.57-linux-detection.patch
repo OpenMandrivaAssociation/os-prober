@@ -1,6 +1,7 @@
---- os-prober-1.57/os-probes/mounted/common/90linux-distro.linux_detect~	2012-12-28 16:07:42.117235596 +0100
-+++ os-prober-1.57/os-probes/mounted/common/90linux-distro	2012-12-28 16:07:48.922150522 +0100
-@@ -17,122 +17,166 @@ type="$3"
+diff -Naur os-prober/os-probes/mounted/common/90linux-distro os-prober.tpg/os-probes/mounted/common/90linux-distro
+--- os-prober/os-probes/mounted/common/90linux-distro	2013-05-19 08:57:50.000000000 +0000
++++ os-prober.tpg/os-probes/mounted/common/90linux-distro	2014-11-08 18:08:32.282821884 +0000
+@@ -17,122 +17,167 @@
  # symlinks we need to also check in $dir/usr/lib* for distributions that
  # moved /lib* to /usr and only left symlinks behind.
  # TODO: look for ld-linux.so on arches that have it
@@ -22,6 +23,7 @@
 +# mandriva-release # mandrake, mandrakelinux, redhat
 +# mandrakelinux-release
 +# mandrake-release
++# distro-release #openmandriva
 +
 +# altlinux-release # redhat
 +# yellowdog-release # centos, fedora
@@ -63,7 +65,7 @@
 +
 +based_or_forked1='SuSE-release sles-release slackware-version zenwalk-version slax-version moblin-release meego-release'
 +based_or_forked2='redhat-release startcom-release fedora-release trustix-release magic-release e-smith-release engarde-release asplinux-release centos-release yellowdog-release altlinux-release'
-+based_or_forked3='mandrake-release mandrakelinux-release mandriva-release pclinuxos-release blackPanther-release'
++based_or_forked3='distro-release mandrake-release mandrakelinux-release mandriva-release pclinuxos-release blackPanther-release'
 +based_or_forked4='debian_version knoppix_version kdemar-release kanotix_version arch-release chakra-release'
 +
 +independant='whitebox-release vine-release turbolinux-release pld-release pardus-release lfs-release gentoo-release frugalware-release caos-release ark-release'

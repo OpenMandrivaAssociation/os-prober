@@ -1,14 +1,17 @@
+%define _enable_debug_packages %{nil}
+%define debug_package %{nil}
+
 %define _libexecdir %{_prefix}/libexec
 %define lprob linux-boot-prober
 
 Summary:	Probes disks on the system for installed operating systems
 Name:		os-prober
-Version:	1.63
-Release:	3
+Version:	1.65
+Release:	0.1
 Group:		System/Configuration/Boot and Init
 License:	GPLv2+
 Url:		http://kitenet.net/~joey/code/os-prober/
-Source0:	http://ftp.de.debian.org/debian/pool/main/o/os-prober/%{name}_%{version}.tar.gz
+Source0:	http://ftp.de.debian.org/debian/pool/main/o/os-prober/%{name}_%{version}.tar.xz
 Source1:	%{name}-pamd
 # move newns binary outside of os-prober subdirectory, so that debuginfo
 # can be automatically generated for it
@@ -23,11 +26,9 @@ Requires:	grep
 Requires:	sed
 Requires:	udev
 Requires:	util-linux
-%if %mdvver >= 201300
 Requires:	kmod
+%if %mdvver < 201500
 Requires:	kmod-compat
-%else
-Requires:	module-init-tool
 %endif
 
 %description
@@ -36,13 +37,15 @@ in a generic machine-readable format. Support for new OSes and Linux
 distributions can be added easily. 
 
 %prep
-%setup -q
+%setup -qn %{name}
 %apply_patches
 
 find -type f -exec sed -i -e 's|usr/lib|usr/libexec|g' {} \;
+sed -i -e 's|grub-probe|grub2-probe|g' os-probes/common/50mounted-tests \
+     linux-boot-probes/common/50mounted-tests
 
 %build
-%make CFLAGS="%{optflags} -Os" LDFLAGS="%{ldflags}"
+%make CC=%{__cc} CFLAGS="%{optflags} -Os" LDFLAGS="%{ldflags}"
 
 %install
 install -m 0755 -d %{buildroot}%{_bindir}
@@ -79,4 +82,3 @@ ln -s %{_bindir}/consolehelper %{buildroot}%{_bindir}/%{lprob}
 %{_datadir}/%{name}
 %{_var}/lib/%{name}
 %{_sysconfdir}/pam.d/*
-
