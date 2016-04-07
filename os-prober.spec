@@ -17,7 +17,7 @@ Source1:	%{name}-pamd
 # can be automatically generated for it
 Patch0:		os-prober-newnsdirfix.patch
 Patch1:		os-prober-bsd-detection.patch
-Patch2:		os-prober-1.57-linux-detection.patch
+Patch2:		os-prober-1.71-linux-detection.patch
 Patch3:		os-prober-missed-os-fix.patch
 Patch4:		os-prober-mdraidfix.patch
 Patch5:		os-prober-1.56-work-around-mount-hang-on-older-kernels.patch
@@ -39,8 +39,6 @@ distributions can be added easily.
 %prep
 %setup -q
 %apply_patches
-
-exit 1
 
 find -type f -exec sed -i -e 's|usr/lib|usr/libexec|g' {} \;
 sed -i -e 's|grub-probe|grub2-probe|g' os-probes/common/50mounted-tests \

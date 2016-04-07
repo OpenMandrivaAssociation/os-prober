@@ -1,7 +1,7 @@
 diff -Naur os-prober/os-probes/mounted/common/90linux-distro os-prober.tpg/os-probes/mounted/common/90linux-distro
 --- os-prober/os-probes/mounted/common/90linux-distro	2013-05-19 08:57:50.000000000 +0000
 +++ os-prober.tpg/os-probes/mounted/common/90linux-distro	2014-11-08 18:08:32.282821884 +0000
-@@ -17,122 +17,167 @@
+@@ -17,125 +17,167 @@
  # symlinks we need to also check in $dir/usr/lib* for distributions that
  # moved /lib* to /usr and only left symlinks behind.
  # TODO: look for ld-linux.so on arches that have it
@@ -64,7 +64,7 @@ diff -Naur os-prober/os-probes/mounted/common/90linux-distro os-prober.tpg/os-pr
 +# system-release
 +
 +based_or_forked1='SuSE-release sles-release slackware-version zenwalk-version slax-version moblin-release meego-release'
-+based_or_forked2='redhat-release startcom-release fedora-release trustix-release magic-release e-smith-release engarde-release asplinux-release centos-release yellowdog-release altlinux-release'
++based_or_forked2='redhat-release startcom-release fedora-release trustix-release magic-release e-smith-release engarde-release asplinux-release centos-release yellowdog-release altlinux-release 4MLinux-version'
 +based_or_forked3='distro-release mandrake-release mandrakelinux-release mandriva-release pclinuxos-release blackPanther-release'
 +based_or_forked4='debian_version knoppix_version kdemar-release kanotix_version arch-release chakra-release'
 +
@@ -265,6 +265,9 @@ diff -Naur os-prober/os-probes/mounted/common/90linux-distro os-prober.tpg/os-pr
 -	elif [ -e "$dir/etc/meego-release" ]; then
 -		short="MeeGo"
 -		long="$(head -1 "$dir/etc/meego-release")"
+-	elif [ -e "$dir/etc/4MLinux-version" ]; then
+-		short="4MLinux"
+-		long="4MLinux $(head -1 "$dir/etc/4MLinux-version")"
 -	else
 -		short="Linux"
 -		long="unknown Linux distribution"
