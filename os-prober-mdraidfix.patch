@@ -1,7 +1,8 @@
-diff -up os-prober-1.55/os-prober.mdraidfix os-prober-1.55/os-prober
---- os-prober-1.55/os-prober.mdraidfix	2012-05-20 05:31:38.000000000 +0430
-+++ os-prober-1.55/os-prober	2012-08-27 23:13:35.961274472 +0430
-@@ -57,6 +57,11 @@ partitions () {
+Index: os-prober/os-prober
+===================================================================
+--- os-prober.orig/os-prober
++++ os-prober/os-prober
+@@ -64,6 +64,11 @@ partitions () {
  		exit 0
  	fi
  
@@ -13,7 +14,7 @@ diff -up os-prober-1.55/os-prober.mdraidfix os-prober-1.55/os-prober
  	# Also detect OSes on LVM volumes (assumes LVM is active)
  	if type lvs >/dev/null 2>&1; then
  		echo "$(LVM_SUPPRESS_FD_WARNINGS=1 log_output lvs --noheadings --separator : -o vg_name,lv_name |
-@@ -116,7 +121,7 @@ if [ -f /proc/swaps ]; then
+@@ -123,7 +128,7 @@ if [ -f /proc/swaps ]; then
  fi
  : >"$OS_PROBER_TMP/raided-map"
  if [ -f /proc/mdstat ] ; then

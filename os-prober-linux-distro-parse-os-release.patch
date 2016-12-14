@@ -1,0 +1,24 @@
+diff -Naur os-prober-1.71/os-probes/mounted/common/90linux-distro os-prober-1.71.tpg/os-probes/mounted/common/90linux-distro
+--- os-prober-1.71/os-probes/mounted/common/90linux-distro	2016-12-14 18:29:10.000000000 +0000
++++ os-prober-1.71.tpg/os-probes/mounted/common/90linux-distro	2016-12-14 18:33:14.346185337 +0000
+@@ -123,6 +123,20 @@
+ elif [ -e "$dir/etc/meego-release" ]; then
+        short="MeeGo"
+        long="$(head -1 "$dir/etc/meego-release")"
++elif [ -L "$dir/etc/os-release" ]; then
++       RELPATH=$(readlink -f "$dir/etc/os-release")
++       if readlink "$dir/etc/os-release" | grep -q '^/'; then
++               RELPATH="$dir$RELPATH"
++       fi
++       if [ -f "$RELPATH" ]; then
++               short=$(sed -n "/^NAME=/{s@\"\(.*\)\"@\1@;t 1;s@'\(.*\)'@\1@;: 1;s@^[^=]\+=@@;p;b}" "$RELPATH")
++               long="$short $(sed -n "/^VERSION=/{s@\"\(.*\)\"@\1@;t 1;s@'\(.*\)'@\1@;: 1;s@^[^=]\+=@@;p;b}" "$RELPATH")"
++       else
++               exit 1
++       fi
++elif [ -e "$dir/etc/os-release" ]; then
++       short=$(sed -n "/^NAME=/{s@\"\(.*\)\"@\1@;t 1;s@'\(.*\)'@\1@;: 1;s@^[^=]\+=@@;p;b}" $dir/etc/os-release)
++       long="$short $(sed -n "/^VERSION=/{s@\"\(.*\)\"@\1@;t 1;s@'\(.*\)'@\1@;: 1;s@^[^=]\+=@@;p;b}" $dir/etc/os-release)"
+  else
+     exit 1
+  fi
