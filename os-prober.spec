@@ -7,7 +7,7 @@
 Summary:	Probes disks on the system for installed operating systems
 Name:		os-prober
 Version:	1.71
-Release:	1
+Release:	2
 Group:		System/Configuration/Boot and Init
 License:	GPLv2+
 Url:		http://kitenet.net/~joey/code/os-prober/
@@ -16,11 +16,27 @@ Source1:	%{name}-pamd
 # move newns binary outside of os-prober subdirectory, so that debuginfo
 # can be automatically generated for it
 Patch0:		os-prober-newnsdirfix.patch
-Patch1:		os-prober-bsd-detection.patch
-Patch2:		os-prober-1.71-linux-detection.patch
-Patch3:		os-prober-missed-os-fix.patch
-Patch4:		os-prober-mdraidfix.patch
-Patch5:		os-prober-1.56-work-around-mount-hang-on-older-kernels.patch
+Patch1:		os-prober-no-dummy-mach-kernel.patch
+# Sent upstream
+Patch2:		os-prober-mdraidfix.patch
+Patch3:		os-prober-yaboot-parsefix.patch
+Patch4:		os-prober-usrmovefix.patch
+Patch5:		os-prober-remove-basename.patch
+Patch6:		os-prober-disable-debug-test.patch
+Patch7:		os-prober-btrfsfix.patch
+Patch8:		os-prober-bootpart-name-fix.patch
+Patch9:		os-prober-mounted-partitions-fix.patch
+Patch10:	os-prober-factor-out-logger.patch
+# To be sent upstream
+Patch11:	os-prober-factored-logger-efi-fix.patch
+Patch12:	os-prober-umount-fix.patch
+Patch13:	os-prober-grub2-parsefix.patch
+Patch14:	os-prober-grepfix.patch
+Patch15:	os-prober-gentoo-fix.patch
+# (tpg) SUSE patches
+Patch20:	os-prober-dont-load-all-fs-module-and-dont-test-mount.patch
+Patch21:	os-prober-linux-distro-avoid-expensive-ld-file-test.patch
+Patch22:	os-prober-linux-distro-parse-os-release.patch
 Requires:	coreutils
 Requires:	grep
 Requires:	sed

@@ -1,0 +1,30 @@
+Index: os-prober-1.58/common.sh
+===================================================================
+--- os-prober-1.58.orig/common.sh
++++ os-prober-1.58/common.sh
+@@ -76,7 +76,9 @@ warn() {
+ }
+ 
+ debug() {
+-  log "debug: $@"
++  if [ -z "$OS_PROBER_DISABLE_DEBUG" ]; then
++    log "debug: $@" 
++  fi
+ }
+ 
+ result () {
+Index: os-prober-1.58/os-probes/mounted/powerpc/20macosx
+===================================================================
+--- os-prober-1.58.orig/os-probes/mounted/powerpc/20macosx
++++ os-prober-1.58/os-probes/mounted/powerpc/20macosx
+@@ -7,7 +7,9 @@ mpoint="$2"
+ type="$3"
+ 
+ debug() {
+-  logger -t macosx-prober "debug: $@"
++  if [ -z "$OS_PROBER_DISABLE_DEBUG" ]; then
++    logger -t macosx-prober "debug: $@"
++  fi
+ }
+ 
+ # Weed out stuff that doesn't apply to us
