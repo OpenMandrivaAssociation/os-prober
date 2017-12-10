@@ -23,4 +23,4 @@ Index: os-prober/linux-boot-prober
 +			bootpart="$(grep " $mpoint/boot " "$OS_PROBER_TMP/mounted-map" | head -n1 | cut -d " " -f 4)"
  			bootmounted=0
  		fi
- 		for test in /usr/lib/linux-boot-probes/mounted/*; do
+ 		for test in /usr/libexec/linux-boot-probes/mounted/*; do
