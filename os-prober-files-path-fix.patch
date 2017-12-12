@@ -1,0 +1,163 @@
+diff --git a/README os-prober-1.76/README
+index e747a7f..0cae4ec 100644
+--- a/README
++++ os-prober-1.76/README
+@@ -18,7 +18,7 @@ such as:
+                                     a chain one for other partitions
+                                     with their own boot sectors.
+ 
+-Tests are executable programs in the directory /usr/lib/os-probes/. Each
++Tests are executable programs in the directory /usr/libexec/os-probes/. Each
+ test is called once per partition, with the partition to check as its
+ parameter, and may output a string as described above, or nothing if it does
+ not recognise an OS on that partition. Tests return an exit code of 0
+@@ -62,7 +62,7 @@ short (or nonexistent), and may be inaccurate, confusing, or non-unique. See
+ TODO for other limitations.
+ 
+ The tests used by linux-boot-prober are in the directory
+-/usr/lib/linux-boot-probes/ and also in /usr/lib/linux-boot-probes/mounted,
++/usr/libexec/linux-boot-probes/ and also in /usr/libexec/linux-boot-probes/mounted,
+ and they are called in a similar way as the os-probes described above.
+ The mounted probes are passed parameters for the root partition, the boot
+ partition, and the directory the filesystems are mounted in.
+diff --git a/common.sh os-prober-1.76/common.sh
+index e1646d4..e6fe78a 100644
+--- a/common.sh
++++ os-prober-1.76/common.sh
+@@ -1,5 +1,5 @@
+ newns () {
+-  [ "$OS_PROBER_NEWNS" ] || exec /usr/lib/os-prober/newns "$0" "$@"
++  [ "$OS_PROBER_NEWNS" ] || exec /usr/libexec/os-prober/newns "$0" "$@"
+ }
+ 
+ cleanup_tmpdir=false
+diff --git a/debian/os-prober-udeb.install os-prober-1.76/debian/os-prober-udeb.install
+index 956a68a..25b03e0 100644
+--- a/debian/os-prober-udeb.install
++++ os-prober-1.76/debian/os-prober-udeb.install
+@@ -1,3 +1,3 @@
+ os-prober linux-boot-prober bin
+-newns usr/lib/os-prober
++newns usr/libexec/os-prober
+ common.sh usr/share/os-prober
+diff --git a/debian/os-prober.install os-prober-1.76/debian/os-prober.install
+index b39e60c..97f9854 100644
+--- a/debian/os-prober.install
++++ os-prober-1.76/debian/os-prober.install
+@@ -1,3 +1,3 @@
+ os-prober linux-boot-prober usr/bin
+-newns usr/lib/os-prober
++newns usr/libexec/os-prober
+ common.sh usr/share/os-prober
+diff --git a/debian/rules os-prober-1.76/debian/rules
+index 81e9ad9..97779cd 100755
+--- a/debian/rules
++++ os-prober-1.76/debian/rules
+@@ -31,12 +31,12 @@ override_dh_install:
+ 	dh_install
+ 	for probes in os-probes os-probes/mounted os-probes/init \
+ 	              linux-boot-probes linux-boot-probes/mounted; do \
+-		dh_install $$probes/common/* usr/lib/$$probes; \
++		dh_install $$probes/common/* usr/libexec/$$probes; \
+ 		if [ -e "$$probes/$(ARCH)" ]; then \
+-			dh_install $$probes/$(ARCH)/* usr/lib/$$probes; \
++			dh_install $$probes/$(ARCH)/* usr/libexec/$$probes; \
+ 		fi; \
+ 	done
+ ifeq ($(ARCH),x86)
+-	dh_install os-probes/mounted/powerpc/20macosx usr/lib/os-probes/mounted
++	dh_install os-probes/mounted/powerpc/20macosx usr/libexec/os-probes/mounted
+ endif
+ 	cp -a debian/os-prober-udeb/usr/lib debian/os-prober/usr/
+diff --git a/linux-boot-prober os-prober-1.76/linux-boot-prober
+index e32dc84..ee8f2b9 100755
+--- a/linux-boot-prober
++++ os-prober-1.76/linux-boot-prober
+@@ -21,7 +21,7 @@ if ! mapped="$(mapdevfs "$partition")"; then
+ fi
+ 
+ if ! grep -q "^$mapped " "$OS_PROBER_TMP/mounted-map"; then
+-	for test in /usr/lib/linux-boot-probes/*; do
++	for test in /usr/libexec/linux-boot-probes/*; do
+ 		debug "running $test"
+ 		if [ -x $test ] && [ -f $test ]; then
+ 			if $test "$partition"; then
+@@ -43,7 +43,7 @@ else
+ 			bootpart="$partition"
+ 			bootmounted=0
+ 		fi
+-		for test in /usr/lib/linux-boot-probes/mounted/*; do
++		for test in /usr/libexec/linux-boot-probes/mounted/*; do
+ 			if [ -f $test ] && [ -x $test ]; then
+ 				debug "running $test on mounted $partition"
+ 				if $test "$partition" "$bootpart" "$mpoint" "$type"; then
+diff --git a/linux-boot-probes/common/50mounted-tests os-prober-1.76/linux-boot-probes/common/50mounted-tests
+index ad68874..2c8aa81 100755
+--- a/linux-boot-probes/common/50mounted-tests
++++ os-prober-1.76/linux-boot-probes/common/50mounted-tests
+@@ -61,7 +61,7 @@ if [ "$mounted" ]; then
+ 	bootpart="${mountboot%% *}"
+ 	mounted="${mountboot#* }"
+ 
+-	for test in /usr/lib/linux-boot-probes/mounted/*; do
++	for test in /usr/libexec/linux-boot-probes/mounted/*; do
+ 		if [ -f "$test" ] && [ -x "$test" ]; then
+ 			debug "running $test $partition $bootpart $tmpmnt $type"
+ 			if $test "$partition" "$bootpart" "$tmpmnt" "$type"; then
+diff --git a/os-prober os-prober-1.76/os-prober
+index a48863e..64d255f 100755
+--- a/os-prober
++++ os-prober-1.76/os-prober
+@@ -113,7 +113,7 @@ parse_proc_mdstat () {
+ # Needed for idempotency
+ rm -f /var/lib/os-prober/labels
+ 
+-for prog in /usr/lib/os-probes/init/*; do
++for prog in /usr/libexec/os-probes/init/*; do
+ 	if [ -x "$prog" ] && [ -f "$prog" ]; then
+ 		"$prog" || true
+ 	fi
+@@ -150,7 +150,7 @@ for partition in $(partitions); do
+ 	fi
+ 
+ 	if ! grep -q "^$mapped " "$OS_PROBER_TMP/mounted-map" ; then
+-		for test in /usr/lib/os-probes/*; do
++		for test in /usr/libexec/os-probes/*; do
+ 			if [ -f "$test" ] && [ -x "$test" ]; then
+ 				debug "running $test on $partition"
+ 				if "$test" "$partition"; then
+@@ -164,7 +164,7 @@ for partition in $(partitions); do
+ 		mpoint="$(unescape_mount "$mpoint")"
+ 		if [ "$mpoint" != "/target/boot" ] && [ "$mpoint" != "/target" ] && [ "$mpoint" != "/" ]; then
+ 			type=$(grep "^$mapped " "$OS_PROBER_TMP/mounted-map" | head -n1 | cut -d " " -f 3)
+-			for test in /usr/lib/os-probes/mounted/*; do
++			for test in /usr/libexec/os-probes/mounted/*; do
+ 				if [ -f "$test" ] && [ -x "$test" ]; then
+ 					debug "running $test on mounted $partition"
+ 					if "$test" "$partition" "$mpoint" "$type"; then
+diff --git a/os-probes/common/50mounted-tests os-prober-1.76/os-probes/common/50mounted-tests
+index fca15cb..a3a7080 100755
+--- a/os-probes/common/50mounted-tests
++++ os-prober-1.76/os-probes/common/50mounted-tests
+@@ -72,7 +72,7 @@ if type grub-mount >/dev/null 2>&1 && \
+ fi
+ 
+ if [ "$mounted" ]; then
+-	for test in /usr/lib/os-probes/mounted/*; do
++	for test in /usr/libexec/os-probes/mounted/*; do
+ 		debug "running subtest $test"
+ 		if [ -f "$test" ] && [ -x "$test" ]; then
+ 			if "$test" "$partition" "$tmpmnt" "$type"; then
+diff --git a/os-probes/mounted/x86/05efi os-prober-1.76/os-probes/mounted/x86/05efi
+index fcf3697..1e0c658 100755
+--- a/os-probes/mounted/x86/05efi
++++ os-prober-1.76/os-probes/mounted/x86/05efi
+@@ -56,7 +56,7 @@ if [ -z "$efi" ]; then
+ fi
+ 
+ ret=1
+-for test in /usr/lib/os-probes/mounted/efi/*; do
++for test in /usr/libexec/os-probes/mounted/efi/*; do
+ 	debug "running subtest $test"
+ 	if [ -f "$test" ] && [ -x "$test" ]; then
+ 		entry=$("$test" "$mpoint/$efi")

@@ -6,8 +6,8 @@
 
 Summary:	Probes disks on the system for installed operating systems
 Name:		os-prober
-Version:	1.71
-Release:	2
+Version:	1.76
+Release:	1
 Group:		System/Configuration/Boot and Init
 License:	GPLv2+
 Url:		http://kitenet.net/~joey/code/os-prober/
@@ -15,28 +15,28 @@ Source0:	http://ftp.de.debian.org/debian/pool/main/o/os-prober/%{name}_%{version
 Source1:	%{name}-pamd
 # move newns binary outside of os-prober subdirectory, so that debuginfo
 # can be automatically generated for it
-Patch0:		os-prober-newnsdirfix.patch
+Patch0:         os-prober-files-path-fix.patch
 Patch1:		os-prober-no-dummy-mach-kernel.patch
 # Sent upstream
 Patch2:		os-prober-mdraidfix.patch
-Patch3:		os-prober-yaboot-parsefix.patch
-Patch4:		os-prober-usrmovefix.patch
-Patch5:		os-prober-remove-basename.patch
-Patch6:		os-prober-disable-debug-test.patch
-Patch7:		os-prober-btrfsfix.patch
+#Redundant already upstream Patch4:		os-prober-usrmovefix.patch
+Patch7:         os-prober-btrfsfix.patch
 Patch8:		os-prober-bootpart-name-fix.patch
 Patch9:		os-prober-mounted-partitions-fix.patch
 Patch10:	os-prober-factor-out-logger.patch
 # To be sent upstream
 Patch11:	os-prober-factored-logger-efi-fix.patch
 Patch12:	os-prober-umount-fix.patch
-Patch13:	os-prober-grub2-parsefix.patch
+Patch13:        os-prober-grub2-parsefix.patch
 Patch14:	os-prober-grepfix.patch
 Patch15:	os-prober-gentoo-fix.patch
 # (tpg) SUSE patches
 Patch20:	os-prober-dont-load-all-fs-module-and-dont-test-mount.patch
 Patch21:	os-prober-linux-distro-avoid-expensive-ld-file-test.patch
 Patch22:	os-prober-linux-distro-parse-os-release.patch
+#Fixes OMA bug 2234
+Patch23:	microcode-initrd-line-fix.patch
+#Patch0:         os-prober-files-path-fix.patch
 Requires:	coreutils
 Requires:	grep
 Requires:	sed
@@ -56,9 +56,9 @@ distributions can be added easily.
 %setup -q
 %apply_patches
 
-find -type f -exec sed -i -e 's|usr/lib|usr/libexec|g' {} \;
-sed -i -e 's|grub-probe|grub2-probe|g' os-probes/common/50mounted-tests \
-     linux-boot-probes/common/50mounted-tests
+#find -type f -exec sed -i -e 's|usr/lib|usr/libexec|g' {} \;
+#sed -i -e 's|grub-probe|grub2-probe|g' os-probes/common/50mounted-tests \
+#     linux-boot-probes/common/50mounted-tests
 
 %build
 %make CC=%{__cc} CFLAGS="%{optflags} -Os" LDFLAGS="%{ldflags}"
@@ -70,7 +70,7 @@ install -m 0755 -d %{buildroot}%{_sysconfdir}/pam.d
 install -m 0755 -d %{buildroot}%{_var}/lib/%{name}
 
 install -m 0755 -p %{name} %{lprob} %{buildroot}%{_sbindir}
-install -m 0755 -Dp newns %{buildroot}%{_libexecdir}/newns
+install -m 0755 -Dp newns %{buildroot}%{_libexecdir}/os-prober/newns
 install -m 0644 -Dp common.sh %{buildroot}%{_datadir}/%{name}/common.sh
 
 for probes in os-probes os-probes/mounted os-probes/init \

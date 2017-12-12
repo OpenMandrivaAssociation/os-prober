@@ -28,15 +28,6 @@ diff -Naur os-prober-1.71/os-probes/common/50mounted-tests os-prober-1.71.tpg/os
  fi
  
  tmpmnt=/var/lib/os-prober/mount
-@@ -177,7 +171,7 @@
- 	fi
- else
- 	ro_partition "$partition"
--	for type in $types $delaytypes; do
-+	for type in $types; do
- 		if mount -o ro -t "$type" "$partition" "$tmpmnt" 2>/dev/null; then
- 			debug "mounted as $type filesystem"
- 			mounted=1
 diff -Naur os-prober-1.71/os-probes/init/common/10filesystems os-prober-1.71.tpg/os-probes/init/common/10filesystems
 --- os-prober-1.71/os-probes/init/common/10filesystems	2013-07-23 07:38:08.000000000 +0000
 +++ os-prober-1.71.tpg/os-probes/init/common/10filesystems	2016-12-14 18:40:16.347093479 +0000
