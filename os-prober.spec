@@ -7,7 +7,7 @@
 Summary:	Probes disks on the system for installed operating systems
 Name:		os-prober
 Version:	1.76
-Release:	1
+Release:	2
 Group:		System/Configuration/Boot and Init
 License:	GPLv2+
 Url:		http://kitenet.net/~joey/code/os-prober/
