@@ -438,9 +438,9 @@ Index: os-prober/README.btrfs
 +	fi
 +fi
 +
- if type grub-mount >/dev/null 2>&1 && \
-    type grub-probe >/dev/null 2>&1 && \
-    grub-mount "$partition" "$tmpmnt" 2>/dev/null; then
+ if type grub2-mount >/dev/null 2>&1 && \
+    type grub2-probe >/dev/null 2>&1 && \
+    grub2-mount "$partition" "$tmpmnt" 2>/dev/null; then
 --- os-prober-1.76/os-prober.0007~	2017-12-09 10:57:28.189988548 +0000
 +++ os-prober-1.76/os-prober	2017-12-09 11:01:43.321243122 +0000
 @@ -76,9 +76,12 @@

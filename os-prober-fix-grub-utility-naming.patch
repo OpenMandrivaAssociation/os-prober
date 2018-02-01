@@ -1,0 +1,37 @@
+diff --git os-prober-1.76/linux-boot-probes/common/50mounted-tests os-prober-1.76/linux-boot-probes/common/50mounted-tests
+index ad68874..c135258 100755
+--- os-prober-1.76/linux-boot-probes/common/50mounted-tests
++++ os-prober-1.76/linux-boot-probes/common/50mounted-tests
+@@ -48,9 +48,9 @@ if [ ! -d "$tmpmnt" ]; then
+ fi
+ 
+ mounted=
+-if type grub-mount >/dev/null 2>&1 && \
+-   type grub-probe >/dev/null 2>&1 && \
+-   grub-mount "$partition" "$tmpmnt" 2>/dev/null; then
++if type grub2-mount >/dev/null 2>&1 && \
++   type grub2-probe >/dev/null 2>&1 && \
++   grub2-mount "$partition" "$tmpmnt" 2>/dev/null; then
+ 	mounted=1
+ 	type="$(grub-probe -d "$partition" -t fs)"
+ 	[ "$type" ] || type=fuseblk
+diff --git os-prober-1.76/os-probes/common/50mounted-tests os-prober-1.76/os-probes/common/50mounted-tests
+index fca15cb..c99ea29 100755
+--- os-prober-1.76/os-probes/common/50mounted-tests
++++ os-prober-1.76/os-probes/common/50mounted-tests
+@@ -58,11 +58,11 @@ if [ ! -d "$tmpmnt" ]; then
+ fi
+ 
+ mounted=
+-if type grub-mount >/dev/null 2>&1 && \
+-   type grub-probe >/dev/null 2>&1 && \
+-   grub-mount "$partition" "$tmpmnt" 2>/dev/null; then
++if type grub2-mount >/dev/null 2>&1 && \
++   type grub2-probe >/dev/null 2>&1 && \
++   grub2-mount "$partition" "$tmpmnt" 2>/dev/null; then
+ 	mounted=1
+-	type="$(grub-probe -d "$partition" -t fs)" || true
++	type="$(grub2-probe -d "$partition" -t fs)" || true
+ 	if [ "$type" ]; then
+ 		debug "mounted using GRUB $type filesystem driver"
+ 	else
