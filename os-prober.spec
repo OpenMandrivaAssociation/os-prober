@@ -17,8 +17,10 @@ Source1:	%{name}-pamd
 # can be automatically generated for it
 Patch0:         os-prober-files-path-fix.patch
 Patch1:		os-prober-no-dummy-mach-kernel.patch
+# Fixes OMA Bug 2300
+Patch2:		os-prober-fix-grub-utility-naming.patch
 # Sent upstream
-Patch2:		os-prober-mdraidfix.patch
+Patch3:		os-prober-mdraidfix.patch
 #Redundant already upstream Patch4:		os-prober-usrmovefix.patch
 Patch7:         os-prober-btrfsfix.patch
 Patch8:		os-prober-bootpart-name-fix.patch
@@ -36,7 +38,6 @@ Patch21:	os-prober-linux-distro-avoid-expensive-ld-file-test.patch
 Patch22:	os-prober-linux-distro-parse-os-release.patch
 #Fixes OMA bug 2234
 Patch23:	microcode-initrd-line-fix.patch
-#Patch0:         os-prober-files-path-fix.patch
 Requires:	coreutils
 Requires:	grep
 Requires:	sed
