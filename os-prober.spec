@@ -7,7 +7,7 @@
 Summary:	Probes disks on the system for installed operating systems
 Name:		os-prober
 Version:	1.77
-Release:	4
+Release:	5
 Group:		System/Configuration/Boot and Init
 License:	GPLv2+
 Url:		http://kitenet.net/~joey/code/os-prober/
@@ -54,15 +54,14 @@ in a generic machine-readable format. Support for new OSes and Linux
 distributions can be added easily. 
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 #find -type f -exec sed -i -e 's|usr/lib|usr/libexec|g' {} \;
 #sed -i -e 's|grub-probe|grub2-probe|g' os-probes/common/50mounted-tests \
 #     linux-boot-probes/common/50mounted-tests
 
 %build
-%make CC=%{__cc} CFLAGS="%{optflags} -Os" LDFLAGS="%{ldflags}"
+%make_build CC=%{__cc} CFLAGS="%{optflags} -Os" LDFLAGS="%{ldflags}"
 
 %install
 install -m 0755 -d %{buildroot}%{_bindir}
