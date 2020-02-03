@@ -38,6 +38,8 @@ Patch21:	os-prober-linux-distro-avoid-expensive-ld-file-test.patch
 Patch22:	os-prober-linux-distro-parse-os-release.patch
 #Fixes OMA bug 2234
 Patch23:	microcode-initrd-line-fix.patch
+№ Fixes lsb and os-release probes
+Patch24:	os-prober-fix-lsb-and-os-release.patch
 Requires:	coreutils
 Requires:	grep
 Requires:	sed
