@@ -152,7 +152,7 @@ diff -Naur os-prober-1.71/os-prober os-prober-1.71.tpg/os-prober
 +# mandrake-release, so check their files first.
 +elif [ -e "$dir/etc/openmandriva-release" ]; then
 +	short="OpenMandriva Lx"
-+	long="$(cat "$dir/etc/mageia-release")"
++	long="$(cat "$dir/etc/openmandriva-release")"
 +elif [ -e "$dir/etc/mageia-release" ]; then
 +	short="Mageia"
 +	long="$(cat "$dir/etc/mageia-release")"
