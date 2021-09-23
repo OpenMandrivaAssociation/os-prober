@@ -1,6 +1,3 @@
-%define _enable_debug_packages %{nil}
-%define debug_package %{nil}
-
 %define _libexecdir %{_prefix}/libexec
 %define lprob linux-boot-prober
 
