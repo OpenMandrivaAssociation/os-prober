@@ -3,7 +3,7 @@
 
 Summary:	Probes disks on the system for installed operating systems
 Name:		os-prober
-Version:	1.78
+Version:	1.80
 Release:	1
 Group:		System/Configuration/Boot and Init
 License:	GPLv2+
@@ -32,9 +32,6 @@ Patch15:	os-prober-gentoo-fix.patch
 # (tpg) SUSE patches
 Patch20:	os-prober-dont-load-all-fs-module-and-dont-test-mount.patch
 Patch21:	os-prober-linux-distro-avoid-expensive-ld-file-test.patch
-Patch22:	os-prober-linux-distro-parse-os-release.patch
-#Fixes OMA bug 2234
-Patch23:	microcode-initrd-line-fix.patch
 Requires:	coreutils
 Requires:	grep
 Requires:	sed
@@ -84,13 +81,9 @@ install -m 755 -p os-probes/mounted/powerpc/20macosx \
 cp %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/%{name}
 cp %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/%{lprob}
 
-ln -s %{_bindir}/consolehelper %{buildroot}%{_bindir}/%{name}
-ln -s %{_bindir}/consolehelper %{buildroot}%{_bindir}/%{lprob}
-
 %files
 %doc README TODO debian/copyright debian/changelog
 %{_bindir}/*
-%{_sbindir}/*
 %{_libexecdir}/*
 %{_datadir}/%{name}
 %{_var}/lib/%{name}
