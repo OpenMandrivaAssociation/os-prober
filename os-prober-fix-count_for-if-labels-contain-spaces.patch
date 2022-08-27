@@ -1,0 +1,12 @@
+diff -up os-prober-1.81/common.sh.omv~ os-prober-1.81/common.sh
+--- os-prober-1.81/common.sh.omv~	2022-08-27 21:49:03.574850618 +0200
++++ os-prober-1.81/common.sh	2022-08-27 21:50:04.105211787 +0200
+@@ -28,7 +28,7 @@ count_for() {
+   if [ -z "$_result" ]; then
+     return
+   else
+-    echo "$_result" | cut -d' ' -f2
++    echo "$_result" |rev |cut -d' ' -f1 |rev
+   fi
+ }
+ 

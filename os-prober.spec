@@ -3,7 +3,7 @@
 
 Summary:	Probes disks on the system for installed operating systems
 Name:		os-prober
-Version:	1.80
+Version:	1.81
 Release:	1
 Group:		System/Configuration/Boot and Init
 License:	GPLv2+
@@ -29,6 +29,8 @@ Patch12:	os-prober-umount-fix.patch
 Patch13:        os-prober-grub2-parsefix.patch
 Patch14:	os-prober-grepfix.patch
 Patch15:	os-prober-gentoo-fix.patch
+# Don't error out if a label contains a space (e.g. "OpenMandriva Lx")
+Patch16:	os-prober-fix-count_for-if-labels-contain-spaces.patch
 # (tpg) SUSE patches
 Patch20:	os-prober-dont-load-all-fs-module-and-dont-test-mount.patch
 Patch21:	os-prober-linux-distro-avoid-expensive-ld-file-test.patch
