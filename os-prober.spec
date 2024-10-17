@@ -7,7 +7,7 @@ Version:	1.81
 Release:	2
 Group:		System/Configuration/Boot and Init
 License:	GPLv2+
-Url:		http://kitenet.net/~joey/code/os-prober/
+Url:		https://kitenet.net/~joey/code/os-prober/
 Source0:	http://ftp.de.debian.org/debian/pool/main/o/os-prober/%{name}_%{version}.tar.xz
 Source1:	%{name}-pamd
 # move newns binary outside of os-prober subdirectory, so that debuginfo
