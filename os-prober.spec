@@ -44,6 +44,7 @@ Requires:	kmod
 Requires:	kmod-compat
 %endif
 
+BuildRequires:	make
 %description
 This package detects other OSes available on a system and outputs the results
 in a generic machine-readable format. Support for new OSes and Linux
