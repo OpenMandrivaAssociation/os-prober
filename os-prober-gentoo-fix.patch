@@ -1,7 +1,8 @@
-diff -up os-prober-1.80/linux-boot-probes/mounted/common/90fallback.13~ os-prober-1.80/linux-boot-probes/mounted/common/90fallback
---- os-prober-1.80/linux-boot-probes/mounted/common/90fallback.13~	2022-06-25 17:02:41.495325356 +0200
-+++ os-prober-1.80/linux-boot-probes/mounted/common/90fallback	2022-06-25 17:03:46.827865398 +0200
-@@ -33,7 +33,7 @@ for kernpat in /vmlinuz /vmlinux /boot/v
+diff --git a/linux-boot-probes/mounted/common/90fallback b/linux-boot-probes/mounted/common/90fallback
+index 6b2c125..d3b9730 100755
+--- a/linux-boot-probes/mounted/common/90fallback
++++ b/linux-boot-probes/mounted/common/90fallback
+@@ -33,7 +33,7 @@ for kernpat in /vmlinuz /vmlinux /boot/vmlinuz /boot/vmlinux "/boot/vmlinuz*" \
  			# Dracut initramfses are named differently again.
  			initrdname3=$(echo "$kernfile" | sed "s/vmlinu[zx]/initramfs\*/" | sed 's/$/.img/')
  			# And Gentoo's also

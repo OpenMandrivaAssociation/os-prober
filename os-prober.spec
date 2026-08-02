@@ -3,8 +3,8 @@
 
 Summary:	Probes disks on the system for installed operating systems
 Name:		os-prober
-Version:	1.81
-Release:	2
+Version:	1.85
+Release:	1
 Group:		System/Configuration/Boot and Init
 License:	GPLv2+
 Url:		https://kitenet.net/~joey/code/os-prober/

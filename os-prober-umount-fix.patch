@@ -1,8 +1,8 @@
-Index: os-prober/common.sh
-===================================================================
---- os-prober.orig/common.sh
-+++ os-prober/common.sh
-@@ -336,3 +336,13 @@ linux_mount_boot () {
+diff --git a/common.sh b/common.sh
+index 269ad0e..a079640 100644
+--- a/common.sh
++++ b/common.sh
+@@ -324,3 +324,13 @@ linux_mount_boot () {
  
  	mountboot="$bootpart $mounted"
  }

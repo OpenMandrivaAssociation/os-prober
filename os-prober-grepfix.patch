@@ -1,7 +1,7 @@
-Index: os-prober/os-probes/mounted/x86/83haiku
-===================================================================
---- os-prober.orig/os-probes/mounted/x86/83haiku
-+++ os-prober/os-probes/mounted/x86/83haiku
+diff --git a/os-probes/mounted/x86/83haiku b/os-probes/mounted/x86/83haiku
+index 6de7a1d..16d0767 100755
+--- a/os-probes/mounted/x86/83haiku
++++ b/os-probes/mounted/x86/83haiku
 @@ -13,7 +13,7 @@ case "$type" in
  	*) debug "$partition is not a BeFS partition: exiting"; exit 1 ;;
  esac

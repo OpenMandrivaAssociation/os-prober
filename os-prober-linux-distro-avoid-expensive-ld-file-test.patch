@@ -1,6 +1,7 @@
-diff -up os-prober-1.80/os-prober.15~ os-prober-1.80/os-prober
---- os-prober-1.80/os-prober.15~	2022-06-25 17:04:23.360754026 +0200
-+++ os-prober-1.80/os-prober	2022-06-25 17:04:23.494085736 +0200
+diff --git a/os-prober b/os-prober
+index 104f856..db6596d 100755
+--- a/os-prober
++++ b/os-prober
 @@ -170,6 +170,11 @@ for partition in $(partitions); do
  	# be handled by 50mounted-tests so we can do a subvol only once.
  	type=$(blkid -o value -s TYPE $mapped || true)
@@ -13,10 +14,11 @@ diff -up os-prober-1.80/os-prober.15~ os-prober-1.80/os-prober
  		uuid=$(blkid -o value -s UUID $mapped)
  		if grep -q "^$uuid" "$OS_PROBER_TMP/btrfs-vols" ; then
  			continue
-diff -up os-prober-1.80/os-probes/mounted/common/90linux-distro.15~ os-prober-1.80/os-probes/mounted/common/90linux-distro
---- os-prober-1.80/os-probes/mounted/common/90linux-distro.15~	2022-06-25 17:04:23.494085736 +0200
-+++ os-prober-1.80/os-probes/mounted/common/90linux-distro	2022-06-25 17:09:12.620544324 +0200
-@@ -31,6 +31,12 @@ if (ls "$dir"/lib*/ld*.so* && [ -d "$dir
+diff --git a/os-probes/mounted/common/90linux-distro b/os-probes/mounted/common/90linux-distro
+index b9c24dd..97045c1 100755
+--- a/os-probes/mounted/common/90linux-distro
++++ b/os-probes/mounted/common/90linux-distro
+@@ -31,6 +31,12 @@ if (ls "$dir"/lib*/ld*.so* && [ -d "$dir/boot" ] || ls "$dir"/usr/lib*/ld*.so*)
  		long="$(printf "Debian GNU/Linux (%s)\n" "$(cat "$dir/etc/debian_version")")"
  	# RPM derived distributions may also have a redhat-release or
  	# mandrake-release, so check their files first.

@@ -1,7 +1,7 @@
-diff --git os-prober-1.76/linux-boot-probes/common/50mounted-tests os-prober-1.76/linux-boot-probes/common/50mounted-tests
+diff --git a/linux-boot-probes/common/50mounted-tests b/linux-boot-probes/common/50mounted-tests
 index 2c8aa81..3a71782 100755
---- os-prober-1.76/linux-boot-probes/common/50mounted-tests
-+++ os-prober-1.76/linux-boot-probes/common/50mounted-tests
+--- a/linux-boot-probes/common/50mounted-tests
++++ b/linux-boot-probes/common/50mounted-tests
 @@ -48,11 +48,11 @@ if [ ! -d "$tmpmnt" ]; then
  fi
  
@@ -18,11 +18,11 @@ index 2c8aa81..3a71782 100755
  	[ "$type" ] || type=fuseblk
  fi
  
-diff --git os-prober-1.76/os-probes/common/50mounted-tests os-prober-1.76/os-probes/common/50mounted-tests
-index b9bb8cc..dad618f 100755
---- os-prober-1.76/os-probes/common/50mounted-tests
-+++ os-prober-1.76/os-probes/common/50mounted-tests
-@@ -69,11 +69,11 @@ if [ ! -d "$tmpmnt" ]; then
+diff --git a/os-probes/common/50mounted-tests b/os-probes/common/50mounted-tests
+index a3a7080..605619a 100755
+--- a/os-probes/common/50mounted-tests
++++ b/os-probes/common/50mounted-tests
+@@ -58,11 +58,11 @@ if [ ! -d "$tmpmnt" ]; then
  fi
  
  mounted=

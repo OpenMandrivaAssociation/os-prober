@@ -1,8 +1,8 @@
-Index: os-prober/common.sh
-===================================================================
---- os-prober.orig/common.sh
-+++ os-prober/common.sh
-@@ -269,7 +269,7 @@ linux_mount_boot () {
+diff --git a/common.sh b/common.sh
+index 291385e..ffe7f47 100644
+--- a/common.sh
++++ b/common.sh
+@@ -264,7 +264,7 @@ linux_mount_boot () {
  				if [ "$bindfrom" != "$tmpmnt/boot" ]; then
  					if mount --bind "$bindfrom" "$tmpmnt/boot"; then
  						mounted=1
@@ -11,7 +11,7 @@ Index: os-prober/common.sh
  					else
  						debug "failed to bind-mount $bindfrom onto $tmpmnt/boot"
  					fi
-@@ -277,6 +277,15 @@ linux_mount_boot () {
+@@ -272,6 +272,15 @@ linux_mount_boot () {
  			fi
  			if [ "$mounted" ]; then
  				:

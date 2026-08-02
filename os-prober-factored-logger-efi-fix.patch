@@ -1,7 +1,7 @@
-Index: os-prober/os-probes/mounted/x86/05efi
-===================================================================
---- os-prober.orig/os-probes/mounted/x86/05efi
-+++ os-prober/os-probes/mounted/x86/05efi
+diff --git a/os-probes/mounted/x86/05efi b/os-probes/mounted/x86/05efi
+index 1e0c658..bfbf5c8 100755
+--- a/os-probes/mounted/x86/05efi
++++ b/os-probes/mounted/x86/05efi
 @@ -59,7 +59,11 @@ ret=1
  for test in /usr/libexec/os-probes/mounted/efi/*; do
  	debug "running subtest $test"

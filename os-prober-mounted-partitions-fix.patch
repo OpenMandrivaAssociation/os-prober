@@ -1,8 +1,8 @@
-Index: os-prober/common.sh
-===================================================================
---- os-prober.orig/common.sh
-+++ os-prober/common.sh
-@@ -146,7 +146,7 @@ parse_proc_mounts () {
+diff --git a/common.sh b/common.sh
+index ffe7f47..a1721e4 100644
+--- a/common.sh
++++ b/common.sh
+@@ -151,7 +151,7 @@ parse_proc_mounts () {
  		set -f
  		set -- $line
  		set +f
@@ -11,10 +11,10 @@ Index: os-prober/common.sh
  	done
  }
  
-Index: os-prober/linux-boot-prober
-===================================================================
---- os-prober.orig/linux-boot-prober
-+++ os-prober/linux-boot-prober
+diff --git a/linux-boot-prober b/linux-boot-prober
+index 15c2ba4..c1998c6 100755
+--- a/linux-boot-prober
++++ b/linux-boot-prober
 @@ -167,7 +167,7 @@ else
  			bootpart="${mountboot%% *}"
  			bootmounted="${mountboot#* }"

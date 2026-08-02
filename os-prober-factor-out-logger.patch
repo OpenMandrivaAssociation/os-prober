@@ -1,8 +1,8 @@
-Index: os-prober/common.sh
-===================================================================
---- os-prober.orig/common.sh
-+++ os-prober/common.sh
-@@ -62,10 +62,14 @@ cache_progname() {
+diff --git a/common.sh b/common.sh
+index a1721e4..269ad0e 100644
+--- a/common.sh
++++ b/common.sh
+@@ -57,10 +57,14 @@ cache_progname() {
    esac
  }
  
@@ -21,7 +21,7 @@ Index: os-prober/common.sh
  
  error() {
    log "error: $@"
-@@ -81,10 +85,14 @@ debug() {
+@@ -76,10 +80,14 @@ debug() {
    fi
  }
  
@@ -40,10 +40,10 @@ Index: os-prober/common.sh
  
  # shim to make it easier to use os-prober outside d-i
  if ! type mapdevfs >/dev/null 2>&1; then
-Index: os-prober/linux-boot-prober
-===================================================================
---- os-prober.orig/linux-boot-prober
-+++ os-prober/linux-boot-prober
+diff --git a/linux-boot-prober b/linux-boot-prober
+index c1998c6..f297e24 100755
+--- a/linux-boot-prober
++++ b/linux-boot-prober
 @@ -1,4 +1,12 @@
  #!/bin/sh
 +
@@ -71,10 +71,10 @@ Index: os-prober/linux-boot-prober
  fi
 +) 9>&1 | logger 1>&-  # fd_logger
 +) 3>&1  # fd_result
-Index: os-prober/os-prober
-===================================================================
---- os-prober.orig/os-prober
-+++ os-prober/os-prober
+diff --git a/os-prober b/os-prober
+index acd3840..104f856 100755
+--- a/os-prober
++++ b/os-prober
 @@ -1,7 +1,14 @@
  #!/bin/sh
  set -e
@@ -91,7 +91,7 @@ Index: os-prober/os-prober
  
  newns "$@"
  require_tmpdir
-@@ -136,6 +143,7 @@ fi
+@@ -140,6 +147,7 @@ fi
  
  : >"$OS_PROBER_TMP/btrfs-vols"
  
@@ -99,7 +99,7 @@ Index: os-prober/os-prober
  for partition in $(partitions); do
  	if ! mapped="$(mapdevfs "$partition")"; then
  		log "Device '$partition' does not exist; skipping"
-@@ -200,3 +208,5 @@ for partition in $(partitions); do
+@@ -204,3 +212,5 @@ for partition in $(partitions); do
  		fi
  	fi
  done

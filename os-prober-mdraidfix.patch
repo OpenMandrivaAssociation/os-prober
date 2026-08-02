@@ -1,8 +1,8 @@
-Index: os-prober/os-prober
-===================================================================
---- os-prober.orig/os-prober
-+++ os-prober/os-prober
-@@ -64,6 +64,11 @@ partitions () {
+diff --git a/os-prober b/os-prober
+index 226b54e..c79ef73 100755
+--- a/os-prober
++++ b/os-prober
+@@ -68,6 +68,11 @@ partitions () {
  		exit 0
  	fi
  
@@ -14,7 +14,7 @@ Index: os-prober/os-prober
  	# Also detect OSes on LVM volumes (assumes LVM is active)
  	if type lvs >/dev/null 2>&1; then
  		echo "$(LVM_SUPPRESS_FD_WARNINGS=1 log_output lvs --noheadings --separator : -o vg_name,lv_name |
-@@ -123,7 +128,7 @@ if [ -f /proc/swaps ]; then
+@@ -127,7 +132,7 @@ if [ -f /proc/swaps ]; then
  fi
  : >"$OS_PROBER_TMP/raided-map"
  if [ -f /proc/mdstat ] ; then

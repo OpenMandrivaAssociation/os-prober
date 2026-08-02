@@ -7,11 +7,11 @@ Subject: [PATCH] Don't count our dummy mach_kernel as real MacOS X.
  os-probes/mounted/powerpc/20macosx |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Index: b/os-probes/mounted/powerpc/20macosx
-===================================================================
+diff --git a/os-probes/mounted/powerpc/20macosx b/os-probes/mounted/powerpc/20macosx
+index 2fc7e85..ce51d63 100755
 --- a/os-probes/mounted/powerpc/20macosx
 +++ b/os-probes/mounted/powerpc/20macosx
-@@ -21,7 +21,7 @@ esac
+@@ -23,7 +23,7 @@ esac
  # but I don't think it exists on Mac OS <= 9, and it's XML so parsing in
  # shell will be nasty.
  
